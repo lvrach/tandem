@@ -54,7 +54,9 @@ func loadLock() (*Lock, error) {
 	}
 
 	d, err := ioutil.ReadFile(".tandem-lock.yaml")
-	if err != nil {
+	if err != os.ErrNotExist {
+		return l, nil
+	} else if err != nil {
 		return nil, err
 	}
 
